@@ -66,13 +66,12 @@ st.title('Quarry Crafters')
 # Display Quarry Crafters content
 st.write("Welcome to Quarry Crafters! This is the Quarry Crafters page content.")
 
-# Display summary of the data
-display_data_summary(data)
-
 # Sidebar navigation
 selected_page = st.sidebar.selectbox("Select Page", ["Quarry Crafters"] + list(data.keys()))
 
 # Conditionally display dashboard data
-if selected_page != "Quarry Crafters":
+if selected_page == "Quarry Crafters":
+    display_data_summary(data)
+else:
     st.title(selected_page)
     st.write(data[selected_page])
