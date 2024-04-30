@@ -70,10 +70,3 @@ if selected_page == "Home":
 else:
     st.title(selected_page)
     st.write(data[selected_page])
-
-# Contact emails
-st.subheader("Contact Us")
-st.write("For any inquiries, please feel free to contact us via email:")
-st.write("[ckommine@buffalo.edu](mailto:ckommine@buffalo.edu)")
-st.write("[laharibo@buffalo.edu](mailto:laharibo@buffalo.edu)")
-st.write("[teerthar@buffalo.edu](mailto:teerthar@buffalo.edu)")
