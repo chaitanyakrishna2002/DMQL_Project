@@ -95,7 +95,7 @@ set_background("black")  # Set background color to black
 st.title('Quarry Crafters')
 
 # Display Quarry Crafters content
-if st.sidebar.checkbox("Show Summary", True):
+if 'Quarry Crafters' in st.session_state:
     display_data_summary(data)
 
 # Sidebar navigation
@@ -103,7 +103,7 @@ selected_page = st.sidebar.selectbox("Select Page", ["Quarry Crafters", "Schedul
 
 # Conditionally display dashboard data
 if selected_page == "Quarry Crafters":
-    pass
+    st.session_state['Quarry Crafters'] = True
 elif selected_page == "Schedule Appointment":
     schedule_appointment(data, csv_files[8])  # Index 8 corresponds to 'service_appointments.csv'
 else:
