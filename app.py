@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import os
+import uuid
 
 # Function to fetch data from CSV files
 def fetch_data(csv_files):
@@ -60,13 +61,23 @@ set_background("black")  # Set background color to black
 st.title('Query Crafters')
 
 # Sidebar navigation
-selected_page = st.sidebar.selectbox("Select Page", ["Home"] + list(data.keys()))
+selected_page = st.sidebar.selectbox("Select Page", ["Home", "Schedule Appointment"] + list(data.keys()))
 
 # Display summary on the home page
 if selected_page == "Home":
     st.subheader("Home Page")
     st.write("Welcome to Query Crafters! This is the Home Page content.")
     display_data_summary(data)
+elif selected_page == "Schedule Appointment":
+    st.subheader("Schedule Appointment")
+    customer_name = st.text_input("Customer Name")
+    address = st.text_area("Address")
+    required_service = st.text_input("Required Service")
+    
+    if st.button("Submit"):
+        # Generate an appointment ID
+        appointment_id = str(uuid.uuid4())
+        st.success(f"Appointment scheduled successfully! Appointment ID: {appointment_id}")
 else:
     st.title(selected_page)
     st.write(data[selected_page])
