@@ -2,10 +2,6 @@ import streamlit as st
 import pandas as pd
 import os
 from datetime import datetime
-import spacy
-
-# Load the English model for spaCy
-nlp = spacy.load("en_core_web_sm")
 
 # Function to fetch data from CSV files
 def fetch_data(csv_files):
@@ -71,13 +67,6 @@ def chatbot_greet():
     st.sidebar.write("Hi there! I'm here to help you find the data you need.")
     st.sidebar.write("Feel free to ask me anything!")
 
-# Function to process user input using NLP
-def process_user_input(user_input):
-    doc = nlp(user_input)
-    entities = [(ent.text, ent.label_) for ent in doc.ents]
-    intents = [token.text for token in doc if token.pos_ == "VERB" or token.pos_ == "NOUN"]
-    return entities, intents
-
 # Set background color and text color
 def set_background(color):
     if color:
@@ -127,10 +116,3 @@ elif selected_page == "Home":
 else:
     st.title(selected_page)
     st.write(data[selected_page])
-
-# Process user input using NLP
-user_input = st.text_input("Ask me anything")
-if user_input:
-    entities, intents = process_user_input(user_input)
-    st.write("Entities:", entities)
-    st.write("Intents:", intents)
