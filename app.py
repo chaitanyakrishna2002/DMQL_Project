@@ -49,17 +49,18 @@ def set_background(color):
 
 # List of paths to your CSV files
 csv_files = [
-    r'C:\Users\Teertha Reddy\car_models.csv',
-    r'C:\Users\Teertha Reddy\customer_feedback.csv',
-    r'C:\Users\Teertha Reddy\Customers.csv',
-    r'C:\Users\Teertha Reddy\design_improvements.csv',
-    r'C:\Users\Teertha Reddy\inventory.csv',
-    r'C:\Users\Teertha Reddy\Parts.csv',
-    r'C:\Users\Teertha Reddy\Sales.csv',
-    r'C:\Users\Teertha Reddy\Salespersons.csv',
-    r'C:\Users\Teertha Reddy\service_appointments.csv',
-    r'C:\Users\Teertha Reddy\service_technicians.csv'
+    r'C:\Users\Teertha Reddy\dmql csv files\New folder\car_models.csv',
+    r'C:\Users\Teertha Reddy\dmql csv files\New folder\customer_feedback.csv',
+    r'C:\Users\Teertha Reddy\dmql csv files\New folder\Customers.csv',
+    r'C:\Users\Teertha Reddy\dmql csv files\New folder\design_improvements.csv',
+    r'C:\Users\Teertha Reddy\dmql csv files\New folder\inventory.csv',
+    r'C:\Users\Teertha Reddy\dmql csv files\New folder\Parts.csv',
+    r'C:\Users\Teertha Reddy\dmql csv files\New folder\Sales.csv',
+    r'C:\Users\Teertha Reddy\dmql csv files\New folder\Salespersons.csv',
+    r'C:\Users\Teertha Reddy\dmql csv files\New folder\service_appointments.csv',
+    r'C:\Users\Teertha Reddy\dmql csv files\New folder\service_technicians.csv'
 ]
+
 
 # Fetch data from CSV files
 data = fetch_data(csv_files)
