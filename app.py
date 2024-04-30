@@ -94,16 +94,12 @@ set_background("black")  # Set background color to black
 # Streamlit app
 st.title('Quarry Crafters')
 
-# Display Quarry Crafters content
-if 'Quarry Crafters' in st.session_state:
-    display_data_summary(data)
-
 # Sidebar navigation
 selected_page = st.sidebar.selectbox("Select Page", ["Quarry Crafters", "Schedule Appointment"] + list(data.keys()))
 
 # Conditionally display dashboard data
 if selected_page == "Quarry Crafters":
-    st.session_state['Quarry Crafters'] = True
+    display_data_summary(data)
 elif selected_page == "Schedule Appointment":
     schedule_appointment(data, csv_files[8])  # Index 8 corresponds to 'service_appointments.csv'
 else:
