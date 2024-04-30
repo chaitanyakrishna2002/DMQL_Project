@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import os
-import uuid
+import random
 
 # Function to fetch data from CSV files
 def fetch_data(csv_files):
@@ -36,6 +36,10 @@ def set_background(color):
                             color: white;
                         }}
                         </style>""", unsafe_allow_html=True)
+
+# Function to generate a random 4-digit appointment ID
+def generate_appointment_id():
+    return random.randint(1000, 9999)
 
 # List of paths to your CSV files
 csv_files = [
@@ -75,9 +79,9 @@ elif selected_page == "Schedule Appointment":
     required_service = st.text_input("Required Service")
     
     if st.button("Submit"):
-        # Generate an appointment ID
-        appointment_id = str(uuid.uuid4())
-        st.success(f"Appointment scheduled successfully! Appointment ID: {appointment_id}")
+        # Generate a 4-digit appointment ID
+        appointment_id = generate_appointment_id()
+        st.success(f"Appointment scheduled successfully! Appointment ID: {appointment_id:04}")
 else:
     st.title(selected_page)
     st.write(data[selected_page])
