@@ -13,23 +13,12 @@ def fetch_data(csv_files):
             st.error(f"File not found: {file}")
     return data
 
-# Function to get summary statistics of the data
-def get_data_summary(data):
-    summary = {}
-    for name, df in data.items():
-        summary[name] = {
-            'Number of Rows': df.shape[0],
-            'Number of Columns': df.shape[1],
-            'Column Names': df.columns.tolist()
-        }
-    return summary
-
 # Function to display summary of the data
 def display_data_summary(data):
     st.subheader("Data Summary")
-    data_summary = get_data_summary(data)
-    for name, summary in data_summary.items():
-        st.write(f"**{name}**: {summary}")
+    for name, df in data.items():
+        display_name = name.replace(".csv", "").replace("_", " ").title()
+        st.write(f"**{display_name}**: {df.columns.tolist()}")
 
 # Function to save new appointment to CSV file
 def save_appointment(appointment_data, csv_file):
@@ -84,15 +73,17 @@ set_background("black")  # Set background color to black
 # Streamlit app
 st.title('Query Crafters')
 
+# Display summary of the data
+display_data_summary(data)
+
 # Sidebar navigation
-selected_page = st.sidebar.selectbox("Select Page", ["Home", "Schedule Appointment"] + list(data.keys()))
+selected_page = st.sidebar.selectbox("Select Page", ["Home", "Schedule Appointment"] + [name.replace(".csv", "").title() for name in data.keys()])
 
 # Conditionally display dashboard data
 if selected_page == "Schedule Appointment":
     schedule_appointment(data, csv_files[8])  # Index 8 corresponds to 'service_appointments.csv'
 elif selected_page == "Home":
     st.write("Welcome to Query Crafters! This is the home page.")
-    display_data_summary(data)
 else:
     st.title(selected_page)
-    st.write(data[selected_page])
+    st.write(data[selected_page.lower().replace(" ", "_") + ".csv"])
