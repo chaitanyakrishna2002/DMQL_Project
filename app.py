@@ -125,6 +125,8 @@ if selected_page == "Schedule Appointment":
     schedule_appointment()
 elif selected_page == "Check Appointment Status":
     check_appointment_status()
-else:
+elif selected_page in data:  # Check if selected page exists in data dictionary
     st.title(selected_page)
     st.write(data[selected_page])
+else:
+    st.error("Page not found.")
