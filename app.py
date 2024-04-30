@@ -73,6 +73,9 @@ set_background("black")  # Set background color to black
 # Streamlit app
 st.title('Query Crafters')
 
+# Welcome message
+st.write("Welcome to Query Crafters! This is the home page.")
+
 # Display summary of the data
 display_data_summary(data)
 
@@ -83,7 +86,7 @@ selected_page = st.sidebar.selectbox("Select Page", ["Home", "Schedule Appointme
 if selected_page == "Schedule Appointment":
     schedule_appointment(data, csv_files[8])  # Index 8 corresponds to 'service_appointments.csv'
 elif selected_page == "Home":
-    st.write("Welcome to Query Crafters! This is the home page.")
+    pass  # Home page content already displayed
 else:
     st.title(selected_page)
     st.write(data[selected_page.lower().replace(" ", "_") + ".csv"])
