@@ -64,17 +64,13 @@ set_background("black")  # Set background color to black
 st.title('Query Crafters')
 
 # Display Query Crafters content
-if st.sidebar.checkbox("Home"):
-    st.write("Welcome to Query Crafters! This is the Home Page content.")
-
-# Display summary of the data on the Home Page
-if st.sidebar.checkbox("Show Data Summary"):
-    display_data_summary(data)
+st.write("Welcome to Query Crafters! This is the Home Page content.")
+display_data_summary(data)
 
 # Sidebar navigation
-selected_page = st.sidebar.selectbox("Select Page", ["Home"] + list(data.keys()))
+selected_page = st.sidebar.selectbox("Select Page", list(data.keys()))
 
 # Conditionally display dashboard data
-if selected_page != "Home":
+if selected_page:
     st.title(selected_page)
     st.write(data[selected_page])
