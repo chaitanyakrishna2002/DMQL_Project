@@ -7,7 +7,7 @@ def fetch_data(csv_files):
     data = {}
     for file in csv_files:
         if os.path.exists(file):  # Check if file exists
-            data[os.path.basename(file)] = pd.read_csv(file)
+            data[os.path.basename(file).replace('.csv', '')] = pd.read_csv(file)
         else:
             st.error(f"File not found: {file}")
     return data
@@ -61,18 +61,20 @@ data = fetch_data(csv_files)
 set_background("black")  # Set background color to black
 
 # Streamlit app
-st.title('Quarry Crafters')
+st.title('Query Crafters')
 
-# Display Quarry Crafters content
-st.write("Welcome to Quarry Crafters! This is the Quarry Crafters page content.")
+# Display Query Crafters content
+if st.sidebar.checkbox("Home"):
+    st.write("Welcome to Query Crafters! This is the Home Page content.")
 
-# Display summary of the data
-display_data_summary(data)
+# Display summary of the data on the Home Page
+if st.sidebar.checkbox("Show Data Summary"):
+    display_data_summary(data)
 
 # Sidebar navigation
-selected_page = st.sidebar.selectbox("Select Page", ["Quarry Crafters"] + list(data.keys()))
+selected_page = st.sidebar.selectbox("Select Page", ["Home"] + list(data.keys()))
 
 # Conditionally display dashboard data
-if selected_page != "Quarry Crafters":
+if selected_page != "Home":
     st.title(selected_page)
     st.write(data[selected_page])
