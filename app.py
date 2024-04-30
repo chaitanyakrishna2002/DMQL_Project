@@ -66,7 +66,7 @@ csv_files = [
     r'Sales.csv',
     r'Salespersons.csv',
     r'car_models.csv',
-    r'Ccustomer_feedback.csv',
+    r'customer_feedback.csv',
     r'design_improvements.csv',
     r'inventory.csv',
     r'service_appointments.csv',
