@@ -95,10 +95,8 @@ set_background("black")  # Set background color to black
 st.title('Quarry Crafters')
 
 # Display Quarry Crafters content
-st.write("Welcome to Quarry Crafters! This is the Quarry Crafters page content.")
-
-# Display summary of the data
-display_data_summary(data)
+if st.sidebar.checkbox("Show Summary", True):
+    display_data_summary(data)
 
 # Sidebar navigation
 selected_page = st.sidebar.selectbox("Select Page", ["Quarry Crafters", "Schedule Appointment"] + list(data.keys()))
