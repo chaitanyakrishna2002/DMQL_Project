@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import os
-from datetime import datetime
 
 # Function to fetch data from CSV files
 def fetch_data(csv_files):
@@ -13,32 +12,23 @@ def fetch_data(csv_files):
             st.error(f"File not found: {file}")
     return data
 
+# Function to get summary statistics of the data
+def get_data_summary(data):
+    summary = {}
+    for name, df in data.items():
+        summary[name] = {
+            'Number of Rows': df.shape[0],
+            'Number of Columns': df.shape[1],
+            'Column Names': df.columns.tolist()
+        }
+    return summary
+
 # Function to display summary of the data
 def display_data_summary(data):
     st.subheader("Data Summary")
-    for name, df in data.items():
-        display_name = name.replace(".csv", "").replace("_", " ").title()
-        st.write(f"**{display_name}**: {df.columns.tolist()}")
-
-# Function to save new appointment to CSV file
-def save_appointment(appointment_data, csv_file):
-    df = pd.read_csv(csv_file)
-    df = df.append(appointment_data, ignore_index=True)
-    df.to_csv(csv_file, index=False)
-
-# Function to display page for scheduling appointments
-def schedule_appointment(data, csv_file):
-    st.title("Schedule Appointment")
-    st.write("Please fill in the details to schedule a new appointment.")
-    appointment_id = st.text_input("Appointment ID")
-    customer_id = st.text_input("Customer ID")
-    date = st.date_input("Date", min_value=datetime.now())
-    time = st.time_input("Time")
-    service_type = st.selectbox("Service Type", ["Repair", "Maintenance", "Consultation"])
-    appointment_data = {'Appointment ID': appointment_id, 'Customer ID': customer_id, 'Date': date, 'Time': time, 'Service Type': service_type}
-    if st.button("Schedule Appointment"):
-        save_appointment(appointment_data, csv_file)
-        st.success("Appointment scheduled successfully!")
+    data_summary = get_data_summary(data)
+    for name, summary in data_summary.items():
+        st.write(f"**{name}**: {summary}")
 
 # Set background color and text color
 def set_background(color):
@@ -57,7 +47,7 @@ csv_files = [
     r'Sales.csv',
     r'Salespersons.csv',
     r'car_models.csv',
-    r'customer_feedback.csv',
+    r'Ccustomer_feedback.csv',
     r'design_improvements.csv',
     r'inventory.csv',
     r'service_appointments.csv',
@@ -71,25 +61,18 @@ data = fetch_data(csv_files)
 set_background("black")  # Set background color to black
 
 # Streamlit app
-st.title('Query Crafters')
+st.title('Quarry Crafters')
+
+# Display Quarry Crafters content
+st.write("Welcome to Quarry Crafters! This is the Quarry Crafters page content.")
 
 # Display summary of the data
 display_data_summary(data)
 
 # Sidebar navigation
-selected_page = st.sidebar.selectbox("Select Page", ["Home", "Schedule Appointment"] + [name.replace(".csv", "").title() for name in data.keys()])
-
-# Debug: Print keys in the data dictionary and selected page from sidebar
-print("Keys in data dictionary:", data.keys())
-print("Selected page from sidebar:", selected_page)
+selected_page = st.sidebar.selectbox("Select Page", ["Quarry Crafters"] + list(data.keys()))
 
 # Conditionally display dashboard data
-if selected_page == "Schedule Appointment":
-    schedule_appointment(data, csv_files[8])  # Index 8 corresponds to 'service_appointments.csv'
-elif selected_page == "Home":
-    st.write("Welcome to Query Crafters! This is the home page.")
-else:
+if selected_page != "Quarry Crafters":
     st.title(selected_page)
-    selected_key = selected_page.lower().replace(" ", "_") + ".csv"
-    print("Selected key for data retrieval:", selected_key)
-    st.write(data[selected_key])
+    st.write(data[selected_page])
