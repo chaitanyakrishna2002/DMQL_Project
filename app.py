@@ -49,16 +49,16 @@ def set_background(color):
 
 # List of paths to your CSV files
 csv_files = [
-    r'C:\Users\Teertha Reddy\dmql csv files\New folder\car_models.csv',
-    r'C:\Users\Teertha Reddy\dmql csv files\New folder\customer_feedback.csv',
-    r'C:\Users\Teertha Reddy\dmql csv files\New folder\Customers.csv',
-    r'C:\Users\Teertha Reddy\dmql csv files\New folder\design_improvements.csv',
-    r'C:\Users\Teertha Reddy\dmql csv files\New folder\inventory.csv',
-    r'C:\Users\Teertha Reddy\dmql csv files\New folder\Parts.csv',
-    r'C:\Users\Teertha Reddy\dmql csv files\New folder\Sales.csv',
-    r'C:\Users\Teertha Reddy\dmql csv files\New folder\Salespersons.csv',
-    r'C:\Users\Teertha Reddy\dmql csv files\New folder\service_appointments.csv',
-    r'C:\Users\Teertha Reddy\dmql csv files\New folder\service_technicians.csv'
+    r'Customers.csv',
+    r'Parts.csv',
+    r'Sales.csv',
+    r'Salespersons.csv',
+    r'car_models.csv',
+    r'Ccustomer_feedback.csv',
+    r'design_improvements.csv',
+    r'inventory.csv',
+    r'service_appointments.csv',
+    r'service_technicians.csv'
 ]
 
 
