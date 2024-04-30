@@ -63,16 +63,15 @@ set_background("black")  # Set background color to black
 # Streamlit app
 st.title('Query Crafters')
 
-# Home page content
-if st.sidebar.checkbox("Home"):
-    st.subheader("Home Page")
-    st.write("Welcome to Query Crafters! This is the Home Page content.")
-    display_data_summary(data)
+# Display summary on the home page
+st.subheader("Home Page")
+st.write("Welcome to Query Crafters! This is the Home Page content.")
+display_data_summary(data)
 
 # Sidebar navigation
-selected_page = st.sidebar.selectbox("Select Page", ["Home"] + list(data.keys()))
+selected_page = st.sidebar.selectbox("Select Page", list(data.keys()))
 
 # Conditionally display dashboard data
-if selected_page != "Home":
+if selected_page:
     st.title(selected_page)
     st.write(data[selected_page])
