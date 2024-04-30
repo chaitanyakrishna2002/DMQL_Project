@@ -79,6 +79,10 @@ display_data_summary(data)
 # Sidebar navigation
 selected_page = st.sidebar.selectbox("Select Page", ["Home", "Schedule Appointment"] + [name.replace(".csv", "").title() for name in data.keys()])
 
+# Debug: Print keys in the data dictionary and selected page from sidebar
+print("Keys in data dictionary:", data.keys())
+print("Selected page from sidebar:", selected_page)
+
 # Conditionally display dashboard data
 if selected_page == "Schedule Appointment":
     schedule_appointment(data, csv_files[8])  # Index 8 corresponds to 'service_appointments.csv'
@@ -86,4 +90,6 @@ elif selected_page == "Home":
     st.write("Welcome to Query Crafters! This is the home page.")
 else:
     st.title(selected_page)
-    st.write(data[selected_page.lower().replace(" ", "_") + ".csv"])
+    selected_key = selected_page.lower().replace(" ", "_") + ".csv"
+    print("Selected key for data retrieval:", selected_key)
+    st.write(data[selected_key])
