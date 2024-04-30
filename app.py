@@ -92,3 +92,4 @@ else:
         st.write(data[selected_page.lower().replace(" ", "_") + ".csv"].query(f"{search_query} in {data[selected_page.lower().replace(" ", "_") + '.csv'].columns.tolist()}"))
     else:
         st.write(data[selected_page.lower().replace(" ", "_") + ".csv"])
+
