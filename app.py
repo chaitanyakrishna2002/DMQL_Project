@@ -80,17 +80,13 @@ st.write("Welcome to Query Crafters! This is the home page.")
 display_data_summary(data)
 
 # Sidebar navigation
-selected_page = st.sidebar.selectbox("Select Page", ["Home"] + [name.replace(".csv", "").title() for name in data.keys()])
+selected_page = st.sidebar.selectbox("Select Page", ["Home", "Schedule Appointment"] + [name.replace(".csv", "").title() for name in data.keys()])
 
 # Conditionally display dashboard data
-if selected_page == "Home":
+if selected_page == "Schedule Appointment":
+    schedule_appointment(data, csv_files[8])  # Index 8 corresponds to 'service_appointments.csv'
+elif selected_page == "Home":
     pass  # Home page content already displayed
 else:
     st.title(selected_page)
-    search_query = st.sidebar.text_input("Search")
-    if search_query:
-        columns = data[selected_page.lower().replace(" ", "_") + ".csv"].columns.tolist()
-        filtered_data = data[selected_page.lower().replace(" ", "_") + ".csv"].query(f"{search_query} in {columns}")
-        st.write(filtered_data)
-    else:
-        st.write(data[selected_page.lower().replace(" ", "_") + ".csv"])
+    st.write(data[selected_page.lower().replace(" ", "_") + ".csv"])
