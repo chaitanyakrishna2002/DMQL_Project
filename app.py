@@ -2,6 +2,10 @@ import streamlit as st
 import pandas as pd
 import os
 from datetime import datetime
+import spacy
+
+# Load the English model for spaCy
+nlp = spacy.load("en_core_web_sm")
 
 # Function to fetch data from CSV files
 def fetch_data(csv_files):
@@ -61,6 +65,19 @@ def schedule_appointment(data, csv_file):
         save_appointment(appointment_data, csv_file)
         st.success("Appointment scheduled successfully!")
 
+# Function to greet the user and provide assistance
+def chatbot_greet():
+    st.sidebar.subheader("Chatbot")
+    st.sidebar.write("Hi there! I'm here to help you find the data you need.")
+    st.sidebar.write("Feel free to ask me anything!")
+
+# Function to process user input using NLP
+def process_user_input(user_input):
+    doc = nlp(user_input)
+    entities = [(ent.text, ent.label_) for ent in doc.ents]
+    intents = [token.text for token in doc if token.pos_ == "VERB" or token.pos_ == "NOUN"]
+    return entities, intents
+
 # Set background color and text color
 def set_background(color):
     if color:
@@ -94,14 +111,26 @@ set_background("black")  # Set background color to black
 # Streamlit app
 st.title('Quarry Crafters')
 
+# Greet the user and provide assistance
+chatbot_greet()
+
 # Sidebar navigation
-selected_page = st.sidebar.selectbox("Select Page", ["Quarry Crafters", "Schedule Appointment"] + list(data.keys()))
+selected_page = st.sidebar.selectbox("Select Page", ["Home", "Quarry Crafters", "Schedule Appointment"] + list(data.keys()))
 
 # Conditionally display dashboard data
 if selected_page == "Quarry Crafters":
     display_data_summary(data)
 elif selected_page == "Schedule Appointment":
     schedule_appointment(data, csv_files[8])  # Index 8 corresponds to 'service_appointments.csv'
+elif selected_page == "Home":
+    st.write("Welcome to Quarry Crafters! This is the home page.")
 else:
     st.title(selected_page)
     st.write(data[selected_page])
+
+# Process user input using NLP
+user_input = st.text_input("Ask me anything")
+if user_input:
+    entities, intents = process_user_input(user_input)
+    st.write("Entities:", entities)
+    st.write("Intents:", intents)
