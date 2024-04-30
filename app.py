@@ -16,19 +16,15 @@ def fetch_data(csv_files):
 def get_data_summary(data):
     summary = {}
     for name, df in data.items():
-        summary[name] = {
-            'Number of Rows': df.shape[0],
-            'Number of Columns': df.shape[1],
-            'Column Names': df.columns.tolist()
-        }
+        summary[name] = df.columns.tolist()
     return summary
 
 # Function to display summary of the data
 def display_data_summary(data):
     st.subheader("Data Summary")
     data_summary = get_data_summary(data)
-    for name, summary in data_summary.items():
-        st.write(f"**{name}**: {summary}")
+    for name, columns in data_summary.items():
+        st.write(f"**{name} Columns**: {columns}")
 
 # Set background color and text color
 def set_background(color):
