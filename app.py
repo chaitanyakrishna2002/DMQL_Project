@@ -37,16 +37,6 @@ def save_appointment(appointment_data, csv_file):
     df = df.append(appointment_data, ignore_index=True)
     df.to_csv(csv_file, index=False)
 
-# Function to display appointment status
-def display_appointment_status(appointment_id, csv_file):
-    df = pd.read_csv(csv_file)
-    appointment = df[df['Appointment ID'] == appointment_id]
-    if not appointment.empty:
-        st.write("Appointment Status:")
-        st.write(appointment)
-    else:
-        st.error("Appointment not found.")
-
 # Function to display page for scheduling appointments
 def schedule_appointment(data, csv_file):
     st.title("Schedule Appointment")
@@ -60,12 +50,6 @@ def schedule_appointment(data, csv_file):
     if st.button("Schedule Appointment"):
         save_appointment(appointment_data, csv_file)
         st.success("Appointment scheduled successfully!")
-
-# Function to greet the user and provide assistance
-def chatbot_greet():
-    st.sidebar.subheader("Chatbot")
-    st.sidebar.write("Hi there! I'm here to help you find the data you need.")
-    st.sidebar.write("Feel free to ask me anything!")
 
 # Set background color and text color
 def set_background(color):
@@ -98,21 +82,19 @@ data = fetch_data(csv_files)
 set_background("black")  # Set background color to black
 
 # Streamlit app
-st.title('Quarry Crafters')
+st.title('Query Crafters')
 
-# Greet the user and provide assistance
-chatbot_greet()
+# Display summary of the data
+display_data_summary(data)
 
 # Sidebar navigation
-selected_page = st.sidebar.selectbox("Select Page", ["Home", "Quarry Crafters", "Schedule Appointment"] + list(data.keys()))
+selected_page = st.sidebar.selectbox("Select Page", ["Home", "Schedule Appointment"] + list(data.keys()))
 
 # Conditionally display dashboard data
-if selected_page == "Quarry Crafters":
-    display_data_summary(data)
-elif selected_page == "Schedule Appointment":
+if selected_page == "Schedule Appointment":
     schedule_appointment(data, csv_files[8])  # Index 8 corresponds to 'service_appointments.csv'
 elif selected_page == "Home":
-    st.write("Welcome to Quarry Crafters! This is the home page.")
+    st.write("Welcome to Query Crafters! This is the home page.")
 else:
     st.title(selected_page)
     st.write(data[selected_page])
