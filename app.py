@@ -66,7 +66,7 @@ st.title('Quarry Crafters')
 # Display Quarry Crafters content
 st.write("Welcome to Quarry Crafters! This is the Quarry Crafters page content.")
 
-# Display summary of the data
+# Display summary of the data on the index page
 display_data_summary(data)
 
 # Sidebar navigation
